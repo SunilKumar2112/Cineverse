@@ -12,17 +12,17 @@ function App() {
     <>
       <Grid
         templateAreas={{
-          base: `"nav" " main""aside"`,
+          base: `"nav" " main"`, 
           lg: `"nav nav" "aside main"`,
         }}
       >
         <GridItem area="nav">
           <Navbar />
         </GridItem>
-        <GridItem area="aside" bg="red">
+        <GridItem area="aside" bg="">
           Aside
         </GridItem>
-        <GridItem area="main" bg="blue">
+        <GridItem area="main" bg="">
           Main
           <MovieGrid></MovieGrid>
         </GridItem>
