@@ -1,9 +1,13 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import useMovie from "../hooks/useMovie";
 import MovieCard from "./MovieCard";
+import { useEffect } from "react";
+import apiClients from "../Services/api-clients";
+
 
 const MovieGrid = () => {
   const { movie, error } = useMovie();
+  
 
   return (
     <>

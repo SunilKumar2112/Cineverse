@@ -6,8 +6,9 @@ import MovieGrid from "./components/MovieGrid";
 
 
 
+
 function App() {
-  
+
   return (
     <>
       <Grid
