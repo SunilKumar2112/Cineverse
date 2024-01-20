@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import useMovie, { Movie } from "../hooks/useMovie";
-import { Card, Image, CardBody, Heading,Text, Flex,Box } from "@chakra-ui/react";
-import apiClients from "../Services/api-clients";
+
+import  { Movie } from "../hooks/useMovie";
+import { Card, Image, CardBody, Heading,Text, Flex,HStack} from "@chakra-ui/react";
 import Providers from "../hooks/Providers";
-import { color } from "framer-motion";
 import PlatformIconList from "./PlatformIconList";
+import Rating from "./Rating1";
 
 interface props {
   movie: Movie;
@@ -20,26 +19,34 @@ const MovieCard = ({ movie }: props) => {
 
   return (
     <Card borderRadius={10}
-    
-        
-     overflow="hidden" justifyContent='flex-start' >
-        <Image
-          src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+    height='550px'
+        width='300px'
+     overflow="hidden"  >
+        <Image maxWidth='auto' height='350px'
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
          
 
         />
-      <CardBody>
-      <Flex direction="column" alignItems="flex-start">
      
+        <CardBody >
+          <Flex direction="column" >
+          <HStack justifyContent="space-between"   >
             <Heading fontSize="2xl" fontWeight="bold" color="black" noOfLines={2}>
               {movie.title}
             </Heading>
-     
-        <Text mb={4 }color="gray.500" padding-top='10px'> {movie.release_date}</Text>
-        {provider==null&&<Text>not yet</Text>}
+          <Rating rate={movie.vote_average} />
+        </HStack>
+            <Text mb={4} color="gray.500" paddingTop="10px" margin={0}paddingBottom={0}>
+              {movie.release_date}
+            </Text>  
+            <Text mb={4} color="gray.500" padding={0} margin={0}>
+             <i>Streaming ON</i> 
+            </Text>  
         <PlatformIconList platforms={provider}></PlatformIconList>
-        </Flex>
-      </CardBody>
+          </Flex>
+        </CardBody>
+        
+      
     </Card>
   );
 };

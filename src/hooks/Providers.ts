@@ -11,6 +11,7 @@ export interface provider {
   provider_name: string;
   IN: string[];
   rent: string[];
+  flatrate:FlatRate[]
   
 }
 interface props {
@@ -31,7 +32,7 @@ const Providers = (id: number) => {
         getProvider(i.data.results.IN.flatrate);
       
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.message));
   }, []);
   useEffect(() => {
      // Replace this with the actual name of the "in" object
