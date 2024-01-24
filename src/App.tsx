@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, Show } from "@chakra-ui/react";
 
 import Navbar from "./components/Navbar";
 import axios from "axios";
@@ -27,11 +27,13 @@ function App() {
         <GridItem area="nav">
           <Navbar />
         </GridItem>
-        <GridItem area="aside" bg="">
+        <Show above="lg">
+        <GridItem area="aside" >
           <GenresList />
         </GridItem>
-        <GridItem area="main" bg="">
-          Main
+        </Show>
+        <GridItem area="main" >
+          
           <MovieGrid></MovieGrid>
         </GridItem>
       </Grid>

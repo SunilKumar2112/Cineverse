@@ -6,10 +6,9 @@ interface props{
 const MovieContainer = ({children}:props) => {
   return (
     <Box  
-  
-    
+    width='100%'
  overflow="hidden" 
- padding={3}
+ padding={1}
  borderRadius={10}>
     {children}
  </Box>

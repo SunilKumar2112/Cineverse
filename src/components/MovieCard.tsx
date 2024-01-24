@@ -20,35 +20,33 @@ const MovieCard = ({ movie }: props) => {
 
   return (
     <Card 
-   
- overflow="hidden" 
- 
- borderRadius={10}
+    overflow="hidden" 
+    borderRadius={5}
      >
-        <Image maxWidth='100%'
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          objectFit="cover"
+        <Image maxWidth='100vh'
+          src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+         
          
 
         />
      
         <CardBody >
-          <Flex direction="column" >
+        
           <HStack justifyContent="space-between"   >
-            <Heading fontSize="2xl" fontWeight="bold" color="black" noOfLines={2}>
+            <Heading fontSize="xl" fontWeight="bold" color="black" noOfLines={2}>
               {movie.title}
             </Heading>
           <Rating rate={movie.vote_average} />
         </HStack>
-            <Text mb={4} color="gray.500" paddingTop="10px" margin={0}paddingBottom={0}>
+            {/* <Text mb={4} color="gray.500" paddingTop="10px" margin={0}paddingBottom={0}>
               {movie.release_date}
-            </Text>  
+            </Text>   */}
             <Text mb={4} color="gray.500" padding={0} margin={0}>
              <i>Streaming ON</i> 
             </Text>  
          
         <PlatformIconList platforms={provider}></PlatformIconList>
-          </Flex>
+      
         </CardBody>
         
       
