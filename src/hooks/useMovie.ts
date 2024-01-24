@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import apiClients from "../Services/api-clients";
 import { CanceledError } from "axios";
 import UseData from "./UseData";
+import { genre } from "./usegenre";
 
 export interface Movie {
   id: number;
@@ -15,11 +16,30 @@ interface FetchMovieReader {
   results: Movie[];
 }
 
-const useMovie = () => UseData( "discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_origin_country=IN",'results')
+const useMovie = (selectedGenre: genre | null) =>
+  UseData(
+    "discover/movie",
+    "results",
+    { params: { include_adult: 'false',
+      include_video: 'false',
+      language: 'en-US',
+      page: '1',
+      sort_by: 'popularity.desc',
+    with_origin_country:"IN",
+    with_genres: selectedGenre?.id } },
+    [selectedGenre?.id]
+  );
+
 export default useMovie;
 
-
-
+// {params: { include_adult: 'false',
+//   include_video: 'false',
+//   language: 'en-US',
+//   page: '1',
+//   sort_by: 'popularity.desc',
+// with_origin_country=IN
+//   with_genres: `${selectedGenre?.id}`
+// }}
 
 // const useMovie = () => {
 //   const [movie, setMovie] = useState<Movie[]>([]);
@@ -43,7 +63,7 @@ export default useMovie;
 //         setError(err.message);
 //         setLoading(false);
 //       });
-   
+
 //     return () => controller.abort();
 //   }, []);
 //   return { movie, error, isLoading };

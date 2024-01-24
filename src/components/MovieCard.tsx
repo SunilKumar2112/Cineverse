@@ -38,9 +38,9 @@ const MovieCard = ({ movie }: props) => {
             </Heading>
           <Rating rate={movie.vote_average} />
         </HStack>
-            {/* <Text mb={4} color="gray.500" paddingTop="10px" margin={0}paddingBottom={0}>
+            <Text mb={4} color="gray.500" paddingTop="10px" margin={0}paddingBottom={0}>
               {movie.release_date}
-            </Text>   */}
+            </Text>  
             <Text mb={4} color="gray.500" padding={0} margin={0}>
              <i>Streaming ON</i> 
             </Text>  

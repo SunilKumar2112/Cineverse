@@ -13,7 +13,7 @@ interface props{
 const MovieGrid = ({selectedGenre}:props) => {
   const { data, error, isLoading } = useMovie(selectedGenre);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  console.log(selectedGenre)
+
 
   return (
     <>

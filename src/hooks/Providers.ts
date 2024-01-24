@@ -25,7 +25,8 @@ const Providers = (id: number) => {
     error,
     isLoading,
   } = UseData<provider[]>(`/movie/${id}/watch/providers`, "results");
-
+ 
+ 
   return { provider };
 };
 
