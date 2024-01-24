@@ -4,6 +4,8 @@ import Navbar from "./components/Navbar";
 import axios from "axios";
 import MovieGrid from "./components/MovieGrid";
 import GenresList from "./components/GenresList";
+import { useState } from "react";
+import { genre } from "./hooks/usegenre";
 
 
 
@@ -11,6 +13,8 @@ import GenresList from "./components/GenresList";
 
 
 function App() {
+const [selectedGenre,setSelectedGenre]=useState<genre|null>(null)
+
 
   return (
     <>
@@ -29,12 +33,12 @@ function App() {
         </GridItem>
         <Show above="lg">
         <GridItem area="aside" >
-          <GenresList />
+          <GenresList onSelectedGenre={(item)=>setSelectedGenre(item)}/>
         </GridItem>
         </Show>
         <GridItem area="main" >
           
-          <MovieGrid></MovieGrid>
+          <MovieGrid selectedGenre={selectedGenre} />
         </GridItem>
       </Grid>
     </>

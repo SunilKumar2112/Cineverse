@@ -1,7 +1,7 @@
 
 import UseData from './UseData';
 export interface genre {
-    id: number;
+    id: any;
     name:string;
    
   }
