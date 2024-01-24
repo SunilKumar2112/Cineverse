@@ -5,6 +5,7 @@ import Providers from "../hooks/Providers";
 import PlatformIconList from "./PlatformIconList";
 import Rating from "./Rating1";
 
+
 interface props {
   movie: Movie;
 }
@@ -14,16 +15,19 @@ const MovieCard = ({ movie }: props) => {
   const {provider}=Providers(movie.id)
   const voteAverage =Math.round(movie.vote_average * 100) / 100;
   
-  {console.log(movie.title,movie.id)}
+
  
 
   return (
-    <Card borderRadius={10}
-    height='550px'
-        width='300px'
-     overflow="hidden"  >
-        <Image maxWidth='auto' height='350px'
+    <Card 
+   
+ overflow="hidden" 
+ 
+ borderRadius={10}
+     >
+        <Image maxWidth='100%'
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          objectFit="cover"
          
 
         />
@@ -42,6 +46,7 @@ const MovieCard = ({ movie }: props) => {
             <Text mb={4} color="gray.500" padding={0} margin={0}>
              <i>Streaming ON</i> 
             </Text>  
+         
         <PlatformIconList platforms={provider}></PlatformIconList>
           </Flex>
         </CardBody>

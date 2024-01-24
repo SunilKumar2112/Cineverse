@@ -4,10 +4,11 @@ import MovieCard from "./MovieCard";
 import { useEffect } from "react";
 import apiClients from "../Services/api-clients";
 import MovieCardSkeleton from "./MovieCardSkeleton";
+import MovieContainer from "./MovieContainer";
 
 const MovieGrid = () => {
-  const { movie, error, isLoading } = useMovie();
-  const skeletons = [1, 2, 3, 4, 5, 6];
+  const { data, error, isLoading } = useMovie();
+  const skeletons = [1, 2, 3, 4, 5, 6,7,8,9,10];
 
   return (
     <>
@@ -18,10 +19,15 @@ const MovieGrid = () => {
         padding={10}
       >
         {isLoading &&
-          skeletons.map((skeleton) => <MovieCardSkeleton key={skeleton} />)}
-        {movie.map((item) => (
-          <MovieCard key={item.id} movie={item} />
+          skeletons.map((skeleton) =><MovieContainer> <MovieCardSkeleton key={skeleton} /></MovieContainer>)}
+         
+        {data.map((item) => (
+          <MovieContainer>
+      <MovieCard key={item.id} movie={item} />
+      </MovieContainer>
+
         ))}
+       
       </SimpleGrid>
     </>
   );
