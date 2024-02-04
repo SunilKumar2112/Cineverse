@@ -12,7 +12,7 @@ const UseData = <T>(
   requestConfig?: AxiosRequestConfig,
   deps?: any
 ) => {
-  const [data, setdata] = useState<T[]>([]);
+  const [data, setDate] = useState<T[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
   
@@ -26,7 +26,7 @@ const UseData = <T>(
         ...requestConfig
       })
       .then((res) => {
-        setdata(res.data[results]);
+        setDate(res.data[results]);
         setLoading(false);
       })
       .catch((err) => {

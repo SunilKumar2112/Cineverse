@@ -1,11 +1,28 @@
 
+import { useState } from 'react';
 import UseData from './UseData';
 export interface genre {
     id: any;
     name:string;
    
   }
+ interface props{
+  selectedType:string
+ }
+const UseGenre = (selectedType:any) =>{
+  
+  if(selectedType==null){
+    selectedType='movie'
+    
+  }
+
  
-const UseGenre = () => UseData<genre>('genre/movie/list','genres')
+  
+
+  
+return UseData<genre>(`genre/${selectedType}/list`,'genres', {}, [selectedType])
+
+
+}
 
 export default UseGenre

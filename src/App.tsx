@@ -1,44 +1,61 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 
-import Navbar from "./components/Navbar";
-import axios from "axios";
-import MovieGrid from "./components/MovieGrid";
-import GenresList from "./components/GenresList";
 import { useState } from "react";
+import GenresList from "./components/ContentGenresList";
+import ContentGrid from "./components/ContentGrid";
+import Navbar from "./components/Navbar";
 import { genre } from "./hooks/usegenre";
+import ContentGenresList from "./components/ContentGenresList";
+import ContentSorting, { SortProps } from "./components/ContentSorting";
+import ContentHeading from "./components/ContentHeading";
 
-
-
-
-
+export interface ContentQuery {
+  Genre: genre | null;
+  Type: String;
+  sort: SortProps;
+  Search:string
+}
 
 function App() {
-const [selectedGenre,setSelectedGenre]=useState<genre|null>(null)
-
+  const [ContentQuery, setContentQuery] = useState<ContentQuery>(
+    {} as ContentQuery
+  );
+console.log(ContentQuery.Search);
 
   return (
     <>
       <Grid
-        templateAreas={{
-          base: `"nav" " main"`, 
-          lg: `"nav nav" "aside main"`,
-        }}
+        templateAreas={`"nav nav""main main"`}
         templateColumns={{
           base: `1fr`,
-          lg:'200px 1fr'
+          lg: "200px 1fr",
         }}
       >
-        <GridItem area="nav">
-          <Navbar />
+        <GridItem
+          area="nav"
+          bgColor="transparent"
+          borderRadius="50px"
+          border="1px solid white"
+          boxShadow="1px 4px 4px 5px rgba(0, 0, 0, 0.25)"
+        >
+          <Navbar ContentType={(data) => setContentQuery({...ContentQuery,Type:data})} onSearch={(data) => setContentQuery({...ContentQuery,Search:data})} />
         </GridItem>
-        <Show above="lg">
-        <GridItem area="aside" >
-          <GenresList onSelectedGenre={(item)=>setSelectedGenre(item)}/>
-        </GridItem>
-        </Show>
-        <GridItem area="main" >
-          
-          <MovieGrid selectedGenre={selectedGenre} />
+
+        <GridItem area="main" pt={10}>
+        <ContentHeading contentQuery={ContentQuery}/>
+        
+          <HStack pl={3} display={ContentQuery.Search?'none' :'Flex'}>
+            <ContentGenresList
+              onSelectedGenre={(data) => setContentQuery({...ContentQuery,Genre:data})}
+              selectedType={ContentQuery.Type}
+            ></ContentGenresList>
+            <ContentSorting
+              selectedSort={(Sort: any) => setContentQuery({...ContentQuery,sort:Sort})}
+            />
+          </HStack>
+          <ContentGrid
+           ContentQuery={ContentQuery}
+          />
         </GridItem>
       </Grid>
     </>

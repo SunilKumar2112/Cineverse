@@ -19,12 +19,12 @@ interface props {
 interface FetchMovieReader {
   results: provider[];
 }
-const Providers = (id: number) => {
+const Providers = (url:string) => {
   const {
     data: provider,
     error,
     isLoading,
-  } = UseData<provider[]>(`/movie/${id}/watch/providers`, "results");
+  } = UseData<provider[]>(url, "results");
  
  
   return { provider };

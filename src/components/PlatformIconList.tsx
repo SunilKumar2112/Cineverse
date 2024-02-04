@@ -1,40 +1,40 @@
 import { HStack, Image, Text } from "@chakra-ui/react";
-import { Key } from "react";
-interface props {
+
+interface Props {
   platforms: provider;
 }
+
 interface provider {
   provider_name: string;
   IN: ss;
 }
+
 interface ss {
   rent: string[];
-  flatrate: FlatRate;
+  flatrate: FlatRate[];
 }
+
 export interface FlatRate {
   provider_name: string;
   logo_path: string;
 }
 
-const PlatformIconList = ({ platforms }: props) => {
+const PlatformIconList = ({ platforms }: Props) => {
   const PrintICon = () => {
-    if (platforms.IN && platforms.IN.flatrate) {
-      
+    if (platforms.IN) {
       return (
         <HStack marginY={1}>
-          {platforms.IN.flatrate.map(
-            (FlatRate: { logo_path: Key | null | undefined }) => (
-              <Image
-                key={FlatRate.logo_path}
-                borderRadius="50%"
-                src={`https://image.tmdb.org/t/p/w45${FlatRate.logo_path}`}
-              />
-            )
-          )}
+          {platforms.IN.flatrate?.map((FlatRate) => (
+            <Image
+              key={FlatRate.provider_name}
+              borderRadius="50%"
+              src={`https://image.tmdb.org/t/p/w45${FlatRate.logo_path}`}
+            />
+          ))}
         </HStack>
       );
     } else {
-      return <Text>Coming soon</Text>;
+      return <Text>Not Yet</Text>;
     }
   };
 
@@ -42,15 +42,3 @@ const PlatformIconList = ({ platforms }: props) => {
 };
 
 export default PlatformIconList;
-
-// <HStack marginY={1}>
-// {platforms.IN.flatrate.map(
-//   (FlatRate: { logo_path: Key | null | undefined }) => (
-//     <Image
-//       key={FlatRate.logo_path}
-//       borderRadius="50%"
-//       src={`https://image.tmdb.org/t/p/w45${FlatRate.logo_path}`}
-//     />
-//   )
-// )}
-// </HStack>
