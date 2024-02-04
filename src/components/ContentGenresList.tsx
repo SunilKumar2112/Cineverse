@@ -1,7 +1,6 @@
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import UseGenre, { genre } from "../hooks/UseGenre";
-import { Button, Menu,MenuButton, MenuList, List, ListItem, Spinner, Text, Select } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Select, Spinner } from "@chakra-ui/react";
+import UseGenre from "../hooks/UseGenre";
 
 interface props{
   onSelectedGenre:(genre:any)=> void

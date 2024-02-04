@@ -1,18 +1,25 @@
 import { HStack, Image, Text } from "@chakra-ui/react";
+import { useState } from "react";
 
 interface Props {
-  platforms: provider;
+  platforms: ProviderData;
+  
+  
 }
 
-interface provider {
+export interface ProviderData {
   provider_name: string;
-  IN: ss;
+  IN: {
+    rent: {
+      logo_path: string;
+    }[];
+    flatrate: {
+      provider_name: string;
+      logo_path: string;
+    }[];
+  };
 }
 
-interface ss {
-  rent: string[];
-  flatrate: FlatRate[];
-}
 
 export interface FlatRate {
   provider_name: string;
@@ -20,8 +27,14 @@ export interface FlatRate {
 }
 
 const PlatformIconList = ({ platforms }: Props) => {
+  
+
+
+ 
+ 
+  
   const PrintICon = () => {
-    if (platforms.IN) {
+    if (platforms && platforms.IN && platforms.IN.flatrate) {
       return (
         <HStack marginY={1}>
           {platforms.IN.flatrate?.map((FlatRate) => (

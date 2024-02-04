@@ -1,11 +1,10 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
 
-import { genre } from "../hooks/usegenre";
+import { ContentQuery } from "../App";
+import useContent from "../hooks/useContent";
 import ContentCard from "./ContentCard";
 import ContentCardSkeleton from "./ContentCardSkeleton";
 import ContentContainer from "./ContentContainer";
-import useContent from "../hooks/useContent";
-import { ContentQuery } from "../App";
 interface props{
   ContentQuery:ContentQuery
 }
@@ -14,7 +13,7 @@ const ContentGrid = ({ContentQuery}:props) => {
   const { data, error, isLoading } = useContent(ContentQuery);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  if(error) return error && <Text>{error}</Text>
+  if(error) return  <Text>{error}</Text>
   return (
     <>
       
@@ -30,7 +29,7 @@ const ContentGrid = ({ContentQuery}:props) => {
             </ContentContainer>
           ))}
 
-        {data.map((item) => (
+        {data.map((item:any) => (
           <ContentContainer key={item.id}>
             <ContentCard  content={item} mediaType={ContentQuery.Type}/>
           </ContentContainer>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import apiClients from "../Services/api-clients";
 import UseData from "./UseData";
+import { ProviderData } from "../components/PlatformIconList";
 
 export interface FlatRate {
   provider_name: string;
@@ -16,17 +17,19 @@ export interface provider {
 interface props {
   id: number;
 }
+
+
+
 interface FetchMovieReader {
-  results: provider[];
+  results: ProviderData;
 }
-const Providers = (url:string) => {
+const Providers = (url: string) => {
   const {
     data: provider,
     error,
     isLoading,
-  } = UseData<provider[]>(url, "results");
- 
- 
+  } = UseData<ProviderData>(url, "results");
+
   return { provider };
 };
 

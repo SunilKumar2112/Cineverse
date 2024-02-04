@@ -7,12 +7,16 @@ import { SortProps } from "../components/ContentSorting";
 import { ContentQuery } from "../App";
 
 export interface Content {
+  //for movies
   id: number;
   title: string;
   backdrop_path: string;
   poster_path: string;
   release_date: string;
   vote_average: number;
+  // for tv shows
+  first_air_date: any;
+  name: string;
 }
 interface FetchMovieReader {
   results: Content[];
@@ -34,7 +38,7 @@ const useContent = (ContentQuery: ContentQuery) => {
 
   return UseData(
     ContentQuery.Search
-      ? `search/${ContentQuery.Type||'movie'}`
+      ? `search/${ContentQuery.Type || "movie"}`
       : `discover/${ContentQuery.Type || "movie"}`,
     "results",
     {

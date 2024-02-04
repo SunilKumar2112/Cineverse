@@ -6,23 +6,24 @@ import {
   Image,
   Text
 } from "@chakra-ui/react";
-import Providers from "../hooks/Providers";
+import Providers, { provider } from "../hooks/Providers";
 import { Content } from "../hooks/useContent";
-import PlatformIconList from "./PlatformIconList";
+import PlatformIconList, { ProviderData } from "./PlatformIconList";
 import Rating from "./Rating1";
 import moment from "moment";
 import altimage from '../assets/no-image-placeholder.webp'
 
-interface props {
+export interface props {
   content: Content;
-  mediaType:string;
+  mediaType:any;
+  
 }
 
 const ContentCard = ({ content,mediaType }: props) => {
   if(mediaType==null){
     mediaType='movie'
   }
-  const { provider } = Providers(`/${mediaType}/${content.id}/watch/providers`);
+  const { provider } = Providers(`/${mediaType}/${content.id}/watch/providers`) ;
   const voteAverage = Math.round(content.vote_average * 100) / 100;
   const  releaseDate = content.release_date|| content.first_air_date
   const release_date_format=(Date:any)=>moment(Date).format('MMMM DD, YYYY');
@@ -68,7 +69,7 @@ const ContentCard = ({ content,mediaType }: props) => {
           <i>Streaming ON</i>
         </Text>
 
-        <PlatformIconList platforms={provider}></PlatformIconList>
+        {/* <PlatformIconList platforms={provider}></PlatformIconList> */}
       </CardBody>
     </Card>
   );

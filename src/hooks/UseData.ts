@@ -6,9 +6,9 @@ interface FetchResponse<T> {
   results: T[];
 }
 
-const UseData = <T>(
+const UseData = <T >(
   endpoint: string,
-  results: any,
+  results?:  "genres" | "results",
   requestConfig?: AxiosRequestConfig,
   deps?: any
 ) => {
@@ -26,7 +26,7 @@ const UseData = <T>(
         ...requestConfig
       })
       .then((res) => {
-        setDate(res.data[results]);
+        setDate(res.data[results as keyof FetchResponse<T>]);
         setLoading(false);
       })
       .catch((err) => {

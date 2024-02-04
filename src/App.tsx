@@ -1,13 +1,12 @@
-import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack } from "@chakra-ui/react";
 
 import { useState } from "react";
-import GenresList from "./components/ContentGenresList";
-import ContentGrid from "./components/ContentGrid";
-import Navbar from "./components/Navbar";
-import { genre } from "./hooks/usegenre";
 import ContentGenresList from "./components/ContentGenresList";
-import ContentSorting, { SortProps } from "./components/ContentSorting";
+import ContentGrid from "./components/ContentGrid";
 import ContentHeading from "./components/ContentHeading";
+import ContentSorting, { SortProps } from "./components/ContentSorting";
+import Navbar from "./components/Navbar";
+import { genre } from "./hooks/UseGenre";
 
 export interface ContentQuery {
   Genre: genre | null;
