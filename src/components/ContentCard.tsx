@@ -69,7 +69,7 @@ const ContentCard = ({ content,mediaType }: props) => {
           <i>Streaming ON</i>
         </Text>
 
-        {/* <PlatformIconList platforms={provider}></PlatformIconList> */}
+        <PlatformIconList platforms={provider}></PlatformIconList>
       </CardBody>
     </Card>
   );
