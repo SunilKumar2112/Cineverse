@@ -6,7 +6,7 @@ import {
   Image,
   Text
 } from "@chakra-ui/react";
-import Providers, { provider } from "../hooks/Providers";
+import Providers, { provider } from "../hooks/UsProviders";
 import { Content } from "../hooks/useContent";
 import PlatformIconList, { ProviderData } from "./PlatformIconList";
 import Rating from "./Rating1";
