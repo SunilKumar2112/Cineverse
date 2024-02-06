@@ -6,12 +6,12 @@ import {
   Image,
   Text
 } from "@chakra-ui/react";
-import Providers, { provider } from "../hooks/UsProviders";
-import { Content } from "../hooks/useContent";
-import PlatformIconList, { ProviderData } from "./PlatformIconList";
-import Rating from "./Rating1";
 import moment from "moment";
-import altimage from '../assets/no-image-placeholder.webp'
+import altimage from '../assets/no-image-placeholder.webp';
+import Providers from "../hooks/UsProviders";
+import { Content } from "../hooks/useContent";
+import PlatformIconList from "./PlatformIconList";
+import Rating from "./Rating1";
 
 export interface props {
   content: Content;
@@ -36,6 +36,7 @@ const ContentCard = ({ content,mediaType }: props) => {
   else{
     url=altimage
   }
+
 
 
 

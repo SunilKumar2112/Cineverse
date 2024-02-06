@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import apiClients from "../Services/api-clients";
 import { CanceledError } from "axios";
-import UseData from "./UseData";
+import UseData, { FetchResponse } from "./UseData";
 import { genre } from "./UseGenre";
 import { SortProps } from "../components/ContentSorting";
 import { ContentQuery } from "../App";
+import { useQuery } from "@tanstack/react-query";
+import AppClient from "../Services/api-clients";
+
 
 export interface Content {
   //for movies
@@ -23,6 +26,10 @@ interface FetchMovieReader {
 }
 
 const useContent = (ContentQuery: ContentQuery) => {
+  const url = ContentQuery.Search
+    ? `search/${ContentQuery.Type || "movie"}`
+    : `discover/${ContentQuery.Type || "movie"}`;
+  const apiClients=new AppClient(url);
   const params = ContentQuery.Search
     ? { query: ContentQuery?.Search }
     : {
@@ -35,20 +42,33 @@ const useContent = (ContentQuery: ContentQuery) => {
 
         with_genres: ContentQuery.Genre,
       };
+  
+  const {data:temp,error} = useQuery<FetchResponse<Content>,Error,FetchResponse<Content>>({
+    queryKey: [url, ContentQuery],
+    queryFn: () =>
+      apiClients.getallData({params}),
+  });
 
-  return UseData(
-    ContentQuery.Search
-      ? `search/${ContentQuery.Type || "movie"}`
-      : `discover/${ContentQuery.Type || "movie"}`,
-    "results",
-    {
-      params,
-    },
-    [ContentQuery]
-  );
-};
+  
+  const data= temp?temp.data.results:[];
+  
+
+  return {data,error}
+}
 export default useContent;
 
+// without reactquery
+// UseData(
+//   ContentQuery.Search
+//     ? `search/${ContentQuery.Type || "movie"}`
+//     : `discover/${ContentQuery.Type || "movie"}`,
+//   "results",
+//   {
+//     params,
+//   },
+//   [ContentQuery]
+// );
+// };
 // {params: { include_adult: 'false',
 //   include_video: 'false',
 //   language: 'en-US',

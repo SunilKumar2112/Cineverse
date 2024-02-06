@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react";
-import apiClients from "../Services/api-clients";
-import UseData, { FetchResponse } from "./UseData";
-import { ProviderData } from "../components/PlatformIconList";
 import { useQuery } from "@tanstack/react-query";
+import apiClients, { FetchResponse } from "../Services/api-clients";
+import { ProviderData } from "../components/PlatformIconList";
+import { } from "./UseData";
+import AppClient from "../Services/api-clients";
 
 export interface FlatRate {
   provider_name: string;
   logo_path: string;
 }
 
-export interface provider {
-  provider_name: string;
-  IN: string[];
-  rent: string[];
-  flatrate: FlatRate[];
-}
+
 interface props {
   id: number;
 }
@@ -26,15 +21,17 @@ interface FetchMovieReader {
 }
 const Providers = (url: string) => {
 
- 
+  const apiClients=new AppClient<ProviderData>(url); 
 
   const{data}=useQuery({
       queryKey:[`${url}`],
-      queryFn:()=>apiClients.get<FetchResponse<ProviderData>>(`${url}`).then(res=>res.data.results)
+      queryFn:()=>apiClients.getallData()
       
     })
-    const provider= data?data:[]
-    console.log(provider);
+
+    
+    const provider= data?data.data.results:[]
+   
     
 
   return { provider };
