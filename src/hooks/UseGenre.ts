@@ -1,8 +1,14 @@
 import { useState } from "react";
-import UseData from "./UseData";
+import UseData, { FetchResponse } from "./UseData";
+
+import apiClients from "../Services/api-clients";
+import { useQuery } from "@tanstack/react-query";
 export interface genre {
   id: any;
   name: string;
+}
+interface data<t> {
+  genres: t[];
 }
 interface props {
   selectedType: string;
@@ -12,9 +18,17 @@ const UseGenre = (selectedType: any) => {
     selectedType = "movie";
   }
 
-  return UseData<genre>(`genre/${selectedType}/list`,'genres', {}, [
-    selectedType,
-  ]);
+  return useQuery({
+    queryKey: [`genre/${selectedType}/list`, selectedType],
+    queryFn: () =>
+      apiClients
+        .get<data<genre>>(`/genre/${selectedType}/list`)
+        .then((res) => res.data),
+  });
 };
 
 export default UseGenre;
+
+// UseData<genre>(`genre/${selectedType}/list`,'genres', {}, [
+//   selectedType,
+// ]);

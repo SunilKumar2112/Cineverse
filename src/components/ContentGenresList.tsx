@@ -16,7 +16,7 @@ const ContentGenresList = ({onSelectedGenre,selectedType}:props) => {
 
   return (
     <Select placeholder='Select genre' icon={<ChevronDownIcon />} onChange={(e) => onSelectedGenre(e.target.value)} width='200px'>
-    {data.map((item) => (
+    {data?.genres.map((item) => (
       <option key={item.id} value={item.id}>
         {item.name}
       </option>
