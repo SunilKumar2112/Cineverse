@@ -30,7 +30,7 @@ const Providers = (url: string) => {
     })
 
     
-    const provider= data?data.data.results:[]
+    const provider= data?data.results:[]
    
     
 

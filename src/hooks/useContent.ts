@@ -5,9 +5,8 @@ import UseData, { FetchResponse } from "./UseData";
 import { genre } from "./UseGenre";
 import { SortProps } from "../components/ContentSorting";
 import { ContentQuery } from "../App";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import AppClient from "../Services/api-clients";
-
 
 export interface Content {
   //for movies
@@ -29,32 +28,41 @@ const useContent = (ContentQuery: ContentQuery) => {
   const url = ContentQuery.Search
     ? `search/${ContentQuery.Type || "movie"}`
     : `discover/${ContentQuery.Type || "movie"}`;
-  const apiClients=new AppClient(url);
+  const apiClients = new AppClient(url);
   const params = ContentQuery.Search
     ? { query: ContentQuery?.Search }
     : {
         include_adult: "false",
         include_video: "false",
         language: "en-US",
-        page: "1",
+       
         sort_by: ContentQuery.sort || "popularity.desc",
         with_origin_country: "IN",
-
+        page:'1',
         with_genres: ContentQuery.Genre,
       };
-  
-  const {data:temp,error} = useQuery<FetchResponse<Content>,Error,FetchResponse<Content>>({
+
+  // const { data, error } = 
+
+  // const data = temp ? temp.data.results : [];
+ 
+ 
+  return useInfiniteQuery<FetchResponse<Content>,Error,FetchResponse<Content>>({
     queryKey: [url, ContentQuery],
-    queryFn: () =>
-      apiClients.getallData({params}),
+    queryFn: ({pageParam=1}) => 
+    apiClients.getallData({params:{...params,page:pageParam}}),
+    getNextPageParam: (lastPage, allpages) => {
+      console.log(allpages)
+      return allpages.length+ 1
+      
+     
+      
+     
+      
+    },
+    initialPageParam: 1
   });
-
-  
-  const data= temp?temp.data.results:[];
-  
-
-  return {data,error}
-}
+};
 export default useContent;
 
 // without reactquery

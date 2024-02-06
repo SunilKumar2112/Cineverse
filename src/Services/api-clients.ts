@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig } from "axios";
 export interface FetchResponse<T> {
-  results: T[];
+  results: T[],
+  page:number
+  total_pages:number|null
 }
 const axioxinstance= axios.create({
     baseURL: "https://api.themoviedb.org/3",
@@ -14,7 +16,7 @@ const axioxinstance= axios.create({
       this.endpoint=endpoint
     }
   getallData=(params?:AxiosRequestConfig)=>{
-    return axioxinstance.get<FetchResponse<T>>(this.endpoint,params)
+    return axioxinstance.get<FetchResponse<T>>(this.endpoint,params).then(res=>res.data);
   }
   }
   export default AppClient
