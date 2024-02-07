@@ -24,47 +24,49 @@ const ContentGrid = ({ ContentQuery }: props) => {
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const fetchContentCount =
-    data?.pages.reduce((total: any, page: { results: string | any[]; }) => total + page.results.length, 0) || 0;
-  console.log(fetchContentCount);
+    data?.pages.reduce(
+      (total: any, page: { results: string | any[] }) =>
+        total + page.results.length,
+      0
+    ) || 0;
 
   if (error) return <Text>{error.message}</Text>;
   return (
     // <>
-      <InfiniteScroll
-        dataLength={fetchContentCount}
-        hasMore={!!hasNextPage}
-        next={() => fetchNextPage()}
-        loader={<Spinner />}
+    <InfiniteScroll
+      dataLength={fetchContentCount}
+      hasMore={!!hasNextPage}
+      next={() => fetchNextPage()}
+      loader={<Spinner />}
+    >
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+        spacing={3}
+        padding="10px"
       >
-        <SimpleGrid
-          columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-          spacing={3}
-          padding="10px"
-        >
-          {isLoading &&
-            skeletons.map((skeleton) => (
-              <ContentContainer key={skeleton}>
-                <ContentCardSkeleton />
+        {isLoading &&
+          skeletons.map((skeleton) => (
+            <ContentContainer key={skeleton}>
+              <ContentCardSkeleton />
+            </ContentContainer>
+          ))}
+        {data?.pages.map((page,index) => (
+          <React.Fragment key={index}>
+            {page.results.map((item: Content) => (
+              <ContentContainer key={item.id}>
+                <ContentCard content={item} mediaType={ContentQuery.Type} />
               </ContentContainer>
             ))}
-          {data?.pages.map((page: FetchResponse<Content>, index: number) => (
-            <React.Fragment key={index}>
-              {page.results.map((item: Content) => (
-                <ContentContainer key={item.id}>
-                  <ContentCard content={item} mediaType={ContentQuery.Type} />
-                </ContentContainer>
-              ))}
-            </React.Fragment>
-          ))}
-          {/* {data.map((item:any) => (
+          </React.Fragment>
+        ))}
+        {/* {data.map((item:any) => (
           <ContentContainer key={item.id}>
             <ContentCard  content={item} mediaType={ContentQuery.Type}/>
           </ContentContainer>
         ))} */}
-        </SimpleGrid>
-      </InfiniteScroll>
+      </SimpleGrid>
+    </InfiniteScroll>
 
-      
     // </>
   );
 };
@@ -72,8 +74,10 @@ const ContentGrid = ({ ContentQuery }: props) => {
 export default ContentGrid;
 
 // button
-{/* {hasNextPage && (
+{
+  /* {hasNextPage && (
         <Button onClick={() => fetchNextPage()}>
           {isFetchingNextPage ? "Loading..." : "Load More..."}
         </Button>
-      )} */}
+      )} */
+}

@@ -1,12 +1,6 @@
-import { useEffect, useState } from "react";
-import apiClients from "../Services/api-clients";
-import { CanceledError } from "axios";
-import UseData, { FetchResponse } from "./UseData";
-import { genre } from "./UseGenre";
-import { SortProps } from "../components/ContentSorting";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { ContentQuery } from "../App";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import AppClient from "../Services/api-clients";
+import AppClient, { FetchResponse } from "../Services/api-clients";
 
 export interface Content {
   //for movies
@@ -35,32 +29,33 @@ const useContent = (ContentQuery: ContentQuery) => {
         include_adult: "false",
         include_video: "false",
         language: "en-US",
-       
+
         sort_by: ContentQuery.sort || "popularity.desc",
         with_origin_country: "IN",
-        page:'1',
+        page: "1",
         with_genres: ContentQuery.Genre,
       };
 
-  // const { data, error } = 
+  // const { data, error } =
 
   // const data = temp ? temp.data.results : [];
- 
- 
-  return useInfiniteQuery<FetchResponse<Content>,Error,FetchResponse<Content>>({
+
+  return useInfiniteQuery<
+    FetchResponse<Content>,
+    Error
+   
+  
+  >({
     queryKey: [url, ContentQuery],
-    queryFn: ({pageParam=1}) => 
-    apiClients.getallData({params:{...params,page:pageParam}}),
+    queryFn: ({ pageParam = 1 }) =>
+      apiClients.getallData({ params: { ...params, page: pageParam } }),
     getNextPageParam: (lastPage, allpages) => {
-      console.log(allpages)
-      return allpages.length+ 1
-      
      
-      
-     
-      
+      return lastPage.results.length>0? allpages.length+1:undefined;
     },
-    initialPageParam: 1
+    initialPageParam:1
+  
+    
   });
 };
 export default useContent;

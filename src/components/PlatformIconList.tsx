@@ -3,12 +3,10 @@ import { useState } from "react";
 
 interface Props {
   platforms: ProviderData[];
-
-  
 }
-export interface ProviderData{
-  IN:ss[];
-  flatrate:FlatRate[]
+export interface ProviderData {
+  IN: ss[];
+  flatrate: FlatRate[];
 }
 
 // export interface ProviderData {
@@ -23,12 +21,10 @@ export interface ProviderData{
 //     }[];
 //   };
 // }
-interface ss{
-  rent:string[]
-  flatrate:FlatRate[]
+interface ss {
+  rent: string[];
+  flatrate: FlatRate[];
 }
-
-
 
 export interface FlatRate {
   provider_name: string;
@@ -36,24 +32,10 @@ export interface FlatRate {
 }
 
 const PlatformIconList = ({ platforms }: Props) => {
-  
-
-
-
-
- 
-
-
-
-
-
-
-
- 
- 
-  
   const PrintICon = () => {
-    const inProperty = Object.entries(platforms).find(([key, value]) => key === 'IN');
+    const inProperty = Object.entries(platforms).find(
+      ([key, value]) => key === "IN"
+    );
     if (inProperty) {
       const [, a] = inProperty;
       return (
@@ -76,7 +58,6 @@ const PlatformIconList = ({ platforms }: Props) => {
 };
 
 export default PlatformIconList;
-
 
 // const PrintICon = () => {
 //   if (platforms && platforms.IN && platforms.IN.flatrate) {
