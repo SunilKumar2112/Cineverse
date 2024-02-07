@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { ContentQuery } from "../App";
+
 import AppClient, { FetchResponse } from "../Services/api-clients";
+import ContentQueryStore from "../store/ContentQuery";
 
 export interface Content {
   //for movies
@@ -18,11 +19,12 @@ interface FetchMovieReader {
   results: Content[];
 }
 
-const useContent = (ContentQuery: ContentQuery) => {
+const useContent = () => {
+  const{ContentQuery}=ContentQueryStore()
   const url = ContentQuery.Search
     ? `search/${ContentQuery.Type || "movie"}`
     : `discover/${ContentQuery.Type || "movie"}`;
-  const apiClients = new AppClient(url);
+  const apiClients = new AppClient<Content>(url);
   const params = ContentQuery.Search
     ? { query: ContentQuery?.Search }
     : {
@@ -40,22 +42,14 @@ const useContent = (ContentQuery: ContentQuery) => {
 
   // const data = temp ? temp.data.results : [];
 
-  return useInfiniteQuery<
-    FetchResponse<Content>,
-    Error
-   
-  
-  >({
+  return useInfiniteQuery<FetchResponse<Content>, Error>({
     queryKey: [url, ContentQuery],
     queryFn: ({ pageParam = 1 }) =>
       apiClients.getallData({ params: { ...params, page: pageParam } }),
     getNextPageParam: (lastPage, allpages) => {
-     
-      return lastPage.results.length>0? allpages.length+1:undefined;
+      return lastPage.results.length > 0 ? allpages.length + 1 : undefined;
     },
-    initialPageParam:1
-  
-    
+    initialPageParam: 1,
   });
 };
 export default useContent;

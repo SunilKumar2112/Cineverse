@@ -1,18 +1,17 @@
-import { Button, SimpleGrid, Spinner, Text } from "@chakra-ui/react";
+import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 
-import { ContentQuery } from "../App";
+
+import React from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 import useContent, { Content } from "../hooks/useContent";
+import ContentQueryStore from "../store/ContentQuery";
 import ContentCard from "./ContentCard";
 import ContentCardSkeleton from "./ContentCardSkeleton";
 import ContentContainer from "./ContentContainer";
-import React from "react";
-import { FetchResponse } from "../Services/api-clients";
-import InfiniteScroll from "react-infinite-scroll-component";
-interface props {
-  ContentQuery: ContentQuery;
-}
 
-const ContentGrid = ({ ContentQuery }: props) => {
+
+const ContentGrid = () => {
+  const { ContentQuery } = ContentQueryStore();
   const {
     data,
     error,
@@ -20,7 +19,7 @@ const ContentGrid = ({ ContentQuery }: props) => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useContent(ContentQuery);
+  } = useContent();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const fetchContentCount =
@@ -50,7 +49,7 @@ const ContentGrid = ({ ContentQuery }: props) => {
               <ContentCardSkeleton />
             </ContentContainer>
           ))}
-        {data?.pages.map((page,index) => (
+        {data?.pages.map((page, index) => (
           <React.Fragment key={index}>
             {page.results.map((item: Content) => (
               <ContentContainer key={item.id}>

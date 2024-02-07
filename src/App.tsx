@@ -1,25 +1,29 @@
 import { Grid, GridItem, HStack } from "@chakra-ui/react";
 
-import { useState } from "react";
 import ContentGenresList from "./components/ContentGenresList";
 import ContentGrid from "./components/ContentGrid";
 import ContentHeading from "./components/ContentHeading";
-import ContentSorting, { SortProps } from "./components/ContentSorting";
+import ContentSorting from "./components/ContentSorting";
 import Navbar from "./components/Navbar";
 import { genre } from "./hooks/UseGenre";
+import ContentQueryStore from "./store/ContentQuery";
 
-export interface ContentQuery {
-  Genre: genre | null;
-  Type: String;
-  sort: SortProps;
-  Search:string
-}
+// export interface ContentQuery {
+//   Genre: genre | null;
+//   Type: String;
+//   sort: SortProps;
+//   Search: string;
+// }
 
 function App() {
-  const [ContentQuery, setContentQuery] = useState<ContentQuery>(
-    {} as ContentQuery
-  );
-console.log(ContentQuery.Search);
+  // const [ContentQuery, setContentQuery] = useState<ContentQuery>(
+  //   {} as ContentQuery
+  // );
+ const{ContentQuery}=ContentQueryStore();
+
+ 
+ 
+
 
   return (
     <>
@@ -27,7 +31,7 @@ console.log(ContentQuery.Search);
         templateAreas={`"nav nav""main main"`}
         templateColumns={{
           base: `1fr`,
-          lg: "200px 1fr", 
+          lg: "200px 1fr",
         }}
       >
         <GridItem
@@ -37,24 +41,22 @@ console.log(ContentQuery.Search);
           border="1px solid white"
           boxShadow="1px 4px 4px 5px rgba(0, 0, 0, 0.25)"
         >
-          <Navbar ContentType={(data) => setContentQuery({...ContentQuery,Type:data})} onSearch={(data) => setContentQuery({...ContentQuery,Search:data})} />
+          <Navbar
+          
+          />
         </GridItem>
 
         <GridItem area="main" pt={10}>
-        <ContentHeading contentQuery={ContentQuery}/>
-        
-          <HStack pl={3} display={ContentQuery.Search?'none' :'Flex'}>
+          <ContentHeading  />
+
+          <HStack pl={3} display={ContentQuery.Search ? "none" : "Flex"}>
             <ContentGenresList
-              onSelectedGenre={(data) => setContentQuery({...ContentQuery,Genre:data})}
-              selectedType={ContentQuery.Type}
+            
             ></ContentGenresList>
             <ContentSorting
-              selectedSort={(Sort: any) => setContentQuery({...ContentQuery,sort:Sort})}
             />
           </HStack>
-          <ContentGrid
-           ContentQuery={ContentQuery}
-          />
+          <ContentGrid  />
         </GridItem>
       </Grid>
     </>

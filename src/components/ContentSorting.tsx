@@ -1,13 +1,13 @@
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { Select } from '@chakra-ui/react';
-export interface SortProps{
-    selectedSort:(sortOder:string)=>void
-}
+import ContentQueryStore from '../store/ContentQuery';
 
-const ContentSorting = ({selectedSort}:SortProps) => {
+
+const ContentSorting = () => {
+    const{ SetSort }=ContentQueryStore()
   
     return (
-        <Select placeholder='Sort By' icon={<ChevronDownIcon />} onChange={(e) => selectedSort(e.target.value)} width='200px'>
+        <Select placeholder='Sort By' icon={<ChevronDownIcon />} onChange={(e) => SetSort(e.target.value)} width='200px'>
        <option  value="popularity.desc">Popularity Descending</option>
        <option value="popularity.asc">Popularity  Ascending</option>
        <option value="vote_average.desc">Rating  Descending</option>

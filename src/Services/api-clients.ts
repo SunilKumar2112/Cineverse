@@ -21,7 +21,7 @@ class AppClient<T> {
   }
   getallData = (params?: AxiosRequestConfig) => {
     return axiosInstance
-      .get<FetchResponse<T[]>>(this.endpoint, params)
+      .get<FetchResponse<T>>(this.endpoint, params)
       .then((res) => res.data);
   };
 }
