@@ -1,11 +1,11 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { genre } from "../hooks/UseGenre";
+import { genre } from "../entities/genre";
 export interface FetchResponse<T> {
   results: T[];
   page: number;
   genres?: genre;
   total_pages?: number | null;
-  pages:number
+  pages: number;
 }
 const axiosInstance = axios.create({
   baseURL: "https://api.themoviedb.org/3",
@@ -22,6 +22,11 @@ class AppClient<T> {
   getallData = (params?: AxiosRequestConfig) => {
     return axiosInstance
       .get<FetchResponse<T>>(this.endpoint, params)
+      .then((res) => res.data);
+  };
+  getDetails = () => {
+    return axiosInstance
+      .get<T>(this.endpoint, { params: { language: "en-US" } })
       .then((res) => res.data);
   };
 }

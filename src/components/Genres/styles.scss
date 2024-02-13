@@ -1,0 +1,24 @@
+// .Castcrew-genre {
+//     padding-right: 2px;
+//     display: flex;
+//   }
+//   .Castcrew-genre-value {
+//     background-color: rgb(190, 21, 49);
+//     padding: 3px 5px;
+//     font-size: 12px;
+//     border-radius: 4px;
+//     color: white;
+//     margin-right: 20px;
+//   }
+.genres {
+    display: flex;
+    gap: 5px;
+    .genre {
+        background-color: var(--pink);
+        padding: 3px 5px;
+        font-size: 12px;
+        border-radius: 4px;
+        color: white;
+        white-space: nowrap;
+    }
+}

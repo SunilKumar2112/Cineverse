@@ -1,0 +1,69 @@
+@import "../../mixins.scss";
+.circleRating {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: -30px;
+    left: 10px;;
+
+    background-color: white;
+    flex-shrink: 0;
+    align-items: flex-end;
+    @include md {
+        width: 50px;
+        height: 50px;
+    }
+    
+}
+.carouselTitle {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 20px;
+    // font-weight: normal;
+}
+// .carouselItem {
+//     width: 125px;
+//     cursor: pointer;
+//     @include md {
+//         width: calc(25% - 15px);
+//     }
+//     @include lg {
+//         width: calc(20% - 16px);
+//     }
+// }
+.date{
+    font-size: 14px;
+    opacity: 0.5;
+}
+.title {
+    font-size: 16px;
+  
+    @include ellipsis(1);
+    @include md {
+        font-size: 20px;
+    }
+}
+
+// .slick-slide {
+//     margin-right: 16px;
+  
+//     &:last-child {
+//       margin-right: 0;
+//     }
+  
+//     &.slick-active {
+//       margin-right: 16px;
+//     }
+  
+//     &.slick-center {
+//       margin-right: 16px;
+//     }
+//   }
+
+.swiper-button-next,
+.swiper-button-prev {
+  
+    width: 20px;
+    height: 20px; 
+}
+

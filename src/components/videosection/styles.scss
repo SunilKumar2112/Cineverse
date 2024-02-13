@@ -1,0 +1,50 @@
+svg#play {
+  width: 100%;
+  margin: 2px 20px ;
+  // margin-top: -12px;
+  display: block;
+  cursor: pointer;
+  transform-origin: 50% 50%;
+}
+
+svg#play #triangle {
+  fill: rgba(22, 22, 22, 0);
+  transition: 500ms;
+  transform-origin: 50% 50%;
+}
+
+svg #lineOne,
+svg #lineTwo {
+  transform-origin: 50% 50%;
+  transition: 1s;
+}
+
+.PlayBtn:hover {
+  svg#play #triangle {
+    fill: #a3cd3a;
+    transform-origin: 50% 50%;
+    stroke: #a3cd3a;
+  }
+  svg #lineTwo {
+    transform: rotate(-450deg);
+    transform-origin: 50% 50%;
+  }
+  svg#play #lineOne,
+  svg#play.hover #lineOne {
+    stroke: #a3cd3a;
+  }
+  svg#play #lineTwo,
+  svg#play.hover #lineTwo {
+    stroke: #a3cd3a;
+  }
+  .PlayTrailer {
+    color: #a3cd3a;
+  }
+  svg #lineOne {
+    transform: rotate(260deg);
+    -webkit-transform: rotate(260deg);
+    -moz-transform: rotate(260deg);
+    -o-transform: rotate(260deg);
+    transform-origin: 50% 50%;
+  }
+}

@@ -1,25 +1,25 @@
 import { SimpleGrid, Spinner, Text } from "@chakra-ui/react";
 
-
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import useContent, { Content } from "../hooks/useContent";
+import useContent from "../hooks/useContent";
+import { Content } from "../entities/Content";
 import ContentQueryStore from "../store/ContentQuery";
-import ContentCard from "./ContentCard";
+import ContentCard from "./ContentCard/ContentCard";
 import ContentCardSkeleton from "./ContentCardSkeleton";
 import ContentContainer from "./ContentContainer";
 
-
-const ContentGrid = () => {
+const ContentGrid = ({ url }: { url: string }) => {
   const { ContentQuery } = ContentQueryStore();
   const {
     data,
     error,
     isLoading,
-    isFetchingNextPage,
+
     fetchNextPage,
     hasNextPage,
-  } = useContent();
+  } = useContent(url);
+
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const fetchContentCount =

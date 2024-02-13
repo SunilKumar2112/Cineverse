@@ -9,9 +9,7 @@ export interface FlatRate {
 }
 
 
-interface props {
-  id: number;
-}
+
 
 
 
