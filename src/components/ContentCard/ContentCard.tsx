@@ -5,7 +5,8 @@ import altimage from "../../assets/no-image-placeholder.webp";
 import { Content } from "../../entities/Content";
 import Providers from "../../hooks/UsProviders";
 import CircluarRating from "../circleRating/CircluarRating";
-
+import Img from "../Lazyloadimage/Img";
+import './styles.scss'
 export interface props {
   content: Content;
   mediaType: any;
@@ -36,11 +37,11 @@ const ContentCard = ({ content, mediaType }: props) => {
         bg={"transparent"}
       >
         <Box objectFit={"contain"} position={"relative"}>
-          <Image
-            borderRadius={12}
+          <Img
+          className="PosterImg"
+          
             src={`https://image.tmdb.org/t/p/original/${content.poster_path}`}
-            objectFit="cover"
-            maxW="100%"
+            
           />
           {content?.vote_average && (
             <CircluarRating rating={content?.vote_average} />

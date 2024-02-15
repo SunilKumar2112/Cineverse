@@ -5,7 +5,7 @@ import ColorModeSwitch from "./ColorModeSwitch";
 import logo from "../../assets/logo.webp";
 import { HiOutlineSearch } from "react-icons/hi";
 import ContentWrapper from "../contentWrapper/ContentWrapper";
-import './styles.scss'
+import "./styles.scss";
 import SearchInput from "../SearchInput";
 const css = {
   _hover: { color: "purple.500" },
@@ -17,7 +17,7 @@ const NavOuter = {
   border: "1px solid white",
   boxShadow: "1px 4px 4px 5px rgba(0, 0, 0, 0.25)",
   // position:'fixed',
-  display: 'flex',
+  display: "flex",
   padding: "8px",
 };
 
@@ -34,49 +34,55 @@ const Navbar = () => {
 
   return (
     <>
-    
-      <Box className="navbar" {...NavOuter}>
-      <ContentWrapper>
-          <Image
-            src={logo}
-            boxSize="60px"
-            onClick={() => navigate("/")}
-            alt="Logo"
-            objectFit={"cover"}
-          />
+      <Box className="navbar">
+        <ContentWrapper>
+          <Box
+            display={"flex"}
+            flexGrow={1}
+            justifyContent={"space-between"}
+            justifyItems={"center"}
+          >
+            <Image
+              src={logo}
+              boxSize="60px"
+              onClick={() => navigate("/")}
+              alt="Logo"
+              marginTop={-2}
+              objectFit={"cover"}
+            />
 
-          <SearchInput />
+            <SearchInput />
 
-          <Box pr={20}>
-            <HStack whiteSpace={"nowrap"}>
-              <Button
-                onClick={() => {
-                  SetType("movie");
-                  handleSubmit("movie");
-                }}
-                {...css}
-              >
-                Movies
-              </Button>
-              <Button
-                onClick={() => {
-                  SetType("tv");
-                  handleSubmit("tv");
-                }}
-                {...css}
-              >
-                {" "}
-                Tv Shows
-              </Button>
-              {/* <Button>
+            <Box pr={20} justifyItems={"center"}>
+              <HStack whiteSpace={"nowrap"}>
+                <Button
+                  onClick={() => {
+                    SetType("movie");
+                    handleSubmit("movie");
+                  }}
+                  {...css}
+                >
+                  Movies
+                </Button>
+                <Button
+                  onClick={() => {
+                    SetType("tv");
+                    handleSubmit("tv");
+                  }}
+                  {...css}
+                >
+                  {" "}
+                  Tv Shows
+                </Button>
+                {/* <Button>
               <HiOutlineSearch onClick={()=>'hi'} />
               </Button> */}
-              <ColorModeSwitch></ColorModeSwitch>
-            </HStack>
+                <ColorModeSwitch></ColorModeSwitch>
+              </HStack>
+            </Box>
           </Box>
-          </ContentWrapper>
+        </ContentWrapper>
       </Box>
-   
     </>
   );
 };
