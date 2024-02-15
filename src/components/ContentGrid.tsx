@@ -39,7 +39,7 @@ const ContentGrid = ({ url }: { url: string }) => {
       loader={<Spinner />}
     >
       <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+        columns={{ sm: 2, md: 3, lg: 4, xl: 5 }}
         spacing={3}
         padding="10px"
       >

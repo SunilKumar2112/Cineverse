@@ -4,12 +4,14 @@ import ContentGrid from "../../components/ContentGrid";
 import ContentHeading from "../../components/ContentHeading";
 import ContentSorting from "../../components/ContentSorting";
 import ContentQueryStore from "../../store/ContentQuery";
+import ContentWrapper from "../../components/contentWrapper/ContentWrapper";
 
 const ExploreContent = () => {
   const { ContentQuery, SetType } = ContentQueryStore();
 
 
   return (
+    <ContentWrapper>
     <Grid
       templateAreas={{
         lg: `"heading heading"" genres" "grid grid"`,
@@ -26,16 +28,19 @@ const ExploreContent = () => {
         <ContentHeading />
       </GridItem>
       <GridItem area="genres" display={ContentQuery.Search ? "none" : "Flex"}>
-        <HStack spacing={4}>
+        <HStack spacing={4} >
           <ContentGenresList />
           <ContentSorting />
         </HStack>
       </GridItem>
-      <GridItem area="grid">
+      <GridItem area="grid" >
+        
         <ContentGrid url={`discover/${ContentQuery.Type || "movie"}`}/>
+      
       </GridItem>
       
     </Grid>
+    </ContentWrapper>
   );
 };
 
