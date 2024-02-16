@@ -7,7 +7,7 @@ interface props{
 
 const ContentHeading = ({search}:props) => {
   const { ContentQuery: contentQuery } = ContentQueryStore();
-  console.log('hi',contentQuery.Search);
+  console.log('hi',contentQuery.Type);
   
   const heading = search!=undefined
     ? `Search results of  ${search}`

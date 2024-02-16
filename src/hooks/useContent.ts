@@ -8,11 +8,10 @@ interface FetchMovieReader {
   results: Content[];
 }
 
-
-const useContent = (url:string)=> {
+const useContent = (url: string) => {
   const { ContentQuery } = ContentQueryStore();
   // const url = `discover/${ContentQuery.Type || "movie"}`
- 
+
   const apiClients = new AppClient<Content>(url);
   // const params =  {
   //       include_adult: "false",
@@ -25,12 +24,16 @@ const useContent = (url:string)=> {
   //       with_genres: ContentQuery.Genre,
   //     };
 
- 
-
   return useInfiniteQuery<FetchResponse<Content>, Error>({
     queryKey: [url, ContentQuery],
     queryFn: ({ pageParam = 1 }) =>
-      apiClients.getallData({ params: {  page: pageParam } }),
+      apiClients.getallData({
+        params: {
+          with_genres: ContentQuery.Genre,
+          sort_by: ContentQuery.sort || "popularity.desc",
+          page: pageParam,
+        },
+      }),
     getNextPageParam: (lastPage, allpages) => {
       return lastPage.results.length > 0 ? allpages.length + 1 : undefined;
     },

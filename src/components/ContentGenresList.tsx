@@ -12,6 +12,7 @@ const ContentGenresList = () => {
   if (isLoading) return <Spinner />;
   if (!data || !data.genres) return null;
 
+
   return (
     <Select
       placeholder="Select genre"

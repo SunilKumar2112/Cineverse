@@ -30,14 +30,18 @@ const Navbar = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [query, setQuery] = useState("");
-  const [showSearch, setShowSearch] = useState();
+  const [showSearch, setShowSearch] = useState(false);
 
   const navigate = useNavigate();
   const navigationHandler = (type: string) => {
+   
+    
     if (type === "movie") {
       navigate(`/explore/movie`);
+      SetType(type)
     } else {
       navigate(`/explore/tv`);
+      SetType(type)
     }
   };
   useEffect(() => {

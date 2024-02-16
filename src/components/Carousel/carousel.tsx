@@ -12,6 +12,9 @@ import "./styles.scss";
 import moment from "moment";
 import CircluarRating from "../circleRating/CircluarRating";
 import { Link } from "react-router-dom";
+import PosterFallback from '../../assets/no-poster.png'
+import Img from "../Lazyloadimage/Img";
+import ContentContainer from "../ContentContainer";
 interface props {
   title: string;
   data: Content[] | undefined;
@@ -19,11 +22,13 @@ interface props {
   endpoint: string;
 }
 const Carousel = ({ title, data, loading, endpoint }: props) => {
+ 
   return (
     <Box marginBottom={10} marginTop={10}>
       <ContentWrapper>
         {title && <Text className="carouselTitle">{title}</Text>}
       </ContentWrapper>
+     
       <ContentWrapper>
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -49,7 +54,9 @@ const Carousel = ({ title, data, loading, endpoint }: props) => {
         >
           {!loading
             ? data?.map((item) => (
+            
                 <SwiperSlide>
+                  
                   <Link to={`/${endpoint}/${item.id}`}>
                     <Box
                       _hover={{
@@ -64,12 +71,13 @@ const Carousel = ({ title, data, loading, endpoint }: props) => {
                         bg={"transparent"}
                       >
                         <Box objectFit={"contain"} position={"relative"}>
-                          <Image
-                            borderRadius={12}
-                            src={`https://image.tmdb.org/t/p/original/${item.poster_path}`}
-                            objectFit="cover"
-                            maxW="100%"
+                          
+                         <Img
+                           
+                            src={ item.poster_path? `https://image.tmdb.org/t/p/original/${item.poster_path}` :PosterFallback}
+                           className="posterPath"
                           />
+                        
                           {item?.vote_average && (
                             <CircluarRating rating={item?.vote_average} />
                           )}
@@ -89,7 +97,9 @@ const Carousel = ({ title, data, loading, endpoint }: props) => {
                       </Card>
                     </Box>
                   </Link>
+                  
                 </SwiperSlide>
+               
               ))
             : ""}
         </Swiper>

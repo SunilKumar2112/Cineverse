@@ -12,6 +12,7 @@ const Similar = ({ type, id }: props) => {
 
   const title = type === "tv" ? "Similar TV Shows" : "Similar Movies";
 
+if(data?.results === undefined) return null
 
   return (
     <Carousel

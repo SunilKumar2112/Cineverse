@@ -10,9 +10,11 @@ const Homepage = () => {
     <div className="homePage">
   
     <ContentBanner/>
+    <Box >
     <Trending/>
       <Popular />
      <TopRated/>
+     </Box>
   
     </div>
   );

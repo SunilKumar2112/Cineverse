@@ -7,9 +7,11 @@ import { genre } from "../../../entities/genre";
 import useCredits from "../../../hooks/useCredits";
 import CircluarRating from "../../../components/circleRating/CircluarRating";
 import "./DetailsBanner.scss";
-import React from "react";
+import React, { useState } from "react";
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
-
+import VideoPopup from "../../../components/VideoPopup/VideoPopup";
+import Img from "../../../components/Lazyloadimage/Img";
+import PosterFallback from "../../../assets/no-poster.png";
 
 interface props {
   crew: Crew[];
@@ -24,6 +26,8 @@ interface Crew {
 const DetailsBanner = ({ crew, video }: props) => {
   const { Type, id } = useParams();
   const url = `${Type}/${id}` || "";
+  const [show, setShow] = useState(false);
+  const [videoId, setVideoId] = useState(null);
 
   const director = crew.filter((res) => res.job == "Director") || undefined;
 
@@ -52,10 +56,14 @@ const DetailsBanner = ({ crew, video }: props) => {
               <ContentWrapper>
                 <Box w="100%" className="content ">
                   <Box className="left">
-                    <Image
-                      src={imgUtils(data?.poster_path)}
-                      className="posterImg"
-                    />
+                    {data.poster_path ? (
+                      <Img
+                        className="posterImg"
+                        src={imgUtils(data.poster_path)}
+                      />
+                    ) : (
+                      <Img className="posterImg" src={PosterFallback} />
+                    )}
                   </Box>
                   <Box className="right">
                     <Heading className="title">
@@ -71,13 +79,20 @@ const DetailsBanner = ({ crew, video }: props) => {
                         ))}
                     </Box>
                     <HStack className="row">
-              
-                      {data?.vote_average && 
+                      {data?.vote_average && (
                         <CircluarRating rating={data?.vote_average} />
-                      }
-                      <Box display={"flex"} className="PlayBtn" alignItems="center" >
-                      <PlayBtn />
-                    
+                      )}
+                      <Box
+                        display={"flex"}
+                        className="PlayBtn"
+                        alignItems="center"
+                        onClick={() => {
+                          setShow(true);
+                          setVideoId(video.results[0].key);
+                        }}
+                      >
+                        <PlayBtn />
+
                         <Text
                           fontSize="md"
                           className="PlayTrailer"
@@ -88,9 +103,7 @@ const DetailsBanner = ({ crew, video }: props) => {
                         >
                           Play Trailer
                         </Text>
-                       
                       </Box>
-                  
                     </HStack>
                     <Box className="overview">
                       <Text className="heading">Overview</Text>
@@ -179,6 +192,12 @@ const DetailsBanner = ({ crew, video }: props) => {
                   </Box>
                 </Box>
               </ContentWrapper>
+              <VideoPopup
+                show={show}
+                setShow={setShow}
+                videoId={videoId}
+                setVideoId={setVideoId}
+              />
             </React.Fragment>
           )}
         </>

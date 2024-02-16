@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react'
-import {  RouterProvider } from 'react-router-dom'
+import { RouterProvider } from 'react-router-dom'
 import Router from './Router/Router'
-import { useQuery } from '@tanstack/react-query'
 
 
 const app = () => {
    
-  return (<RouterProvider router={Router}/>)
+  return (
+  
+    <RouterProvider router={Router}/>
+
+  )
 
   
    

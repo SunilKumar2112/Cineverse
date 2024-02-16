@@ -6,6 +6,7 @@ import ContentGrid from './ContentGrid';
 import ContentHeading from './ContentHeading';
 import ContentSorting from './ContentSorting';
 import { useParams } from 'react-router-dom';
+import ContentWrapper from './contentWrapper/ContentWrapper';
 
 const SearchResult = () => {
   const{query}=useParams()
@@ -14,6 +15,7 @@ const SearchResult = () => {
   const { ContentQuery, SetType } = ContentQueryStore();
   
   return (
+    <ContentWrapper>
     <Grid
       templateAreas={{
         lg: `"heading heading"" genres" "grid grid"`,
@@ -40,6 +42,7 @@ const SearchResult = () => {
       </GridItem>
       
     </Grid>
+    </ContentWrapper>
   )
 }
 

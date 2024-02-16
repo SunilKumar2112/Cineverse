@@ -15,6 +15,7 @@ import { redirect } from "react-router-dom";
 import "./Styles.scss";
 import imgUtils from "../../../Services/imgUtils";
 import VideoPopup from "../../../components/VideoPopup/VideoPopup";
+import { PlayBtn } from "../../../components/videosection/PlayBtn";
 interface props {
   videos: {
     id: number;
@@ -25,7 +26,7 @@ interface props {
 
 const VideoSection = ({ videos: data, loading }: props) => {
   const [show, setShow] = useState(false);
-  const [videoId, setVideoId] = useState<string |null>(null);
+  const [videoId, setVideoId] = useState<string | null>(null);
   console.log(videoId);
 
   const loadingSkeleton = () => {
@@ -41,8 +42,8 @@ const VideoSection = ({ videos: data, loading }: props) => {
     <div className="videosSection">
       <ContentWrapper>
         <div className="sectionHeading">Official Videos</div>
-        </ContentWrapper>
-        <ContentWrapper>
+      </ContentWrapper>
+      <ContentWrapper>
         {!loading ? (
           <div className="videos">
             <Stack direction="row" overflow="auto">
@@ -57,13 +58,14 @@ const VideoSection = ({ videos: data, loading }: props) => {
                 >
                   <div className="videoThumbnail">
                     <Img
-                    
                       src={`https://img.youtube.com/vi/${video.key}/mqdefault.jpg`}
                       className="IMMmg"
                     />
-                   
+                    <Box height={2} marginBottom={-3}>
+                      <PlayBtn />
+                    </Box>
                   </div>
-                
+
                   <div className="videoTitle">{video.name}</div>
                 </div>
               ))}
@@ -79,11 +81,11 @@ const VideoSection = ({ videos: data, loading }: props) => {
         )}
       </ContentWrapper>
       <VideoPopup
-                show={show}
-                setShow={setShow}
-                videoId={videoId}
-                setVideoId={setVideoId}
-            />
+        show={show}
+        setShow={setShow}
+        videoId={videoId}
+        setVideoId={setVideoId}
+      />
     </div>
   );
 };

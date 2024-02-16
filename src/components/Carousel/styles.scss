@@ -62,8 +62,17 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-  
-    width: 20px;
-    height: 20px; 
+    
+   opacity: 0;
+  @include sm{
+    height: 20px;
+    opacity: 1;
+  }
+}
+.posterPath{
+    object-fit:cover;
+    border-radius:12px;
+   width: 100%;
+
 }
 
