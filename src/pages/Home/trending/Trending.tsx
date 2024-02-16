@@ -6,13 +6,13 @@ const Trending = () => {
   
     const {ContentQuery}=ContentQueryStore()
     const { data, isLoading } = useCredits(`/trending/all/day`);
-  console.log(data);
+
   
   return (
     <Carousel
     data={data?.results}
     loading={isLoading}
-    endpoint={`${ContentQuery.Type}`} title={'Top Rated'}            />
+    endpoint={`${ContentQuery.Type}`} title={'Trending'}            />
 
 );
   

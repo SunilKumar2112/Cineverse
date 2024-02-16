@@ -7,14 +7,14 @@ import Trending from "./trending/Trending";
 
 const Homepage = () => {
   return (
-    <>
+    <div className="homePage">
   
     <ContentBanner/>
     <Trending/>
       <Popular />
      <TopRated/>
   
-    </>
+    </div>
   );
 };
 

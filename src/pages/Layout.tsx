@@ -6,7 +6,7 @@ const Layout = () => {
   return (
     <>
       <Navbar />
-      <Box ml={{ lg: "100px" }} mr={{ lg: "100px" }}>
+      <Box >
         <Outlet />
       </Box>
     </>

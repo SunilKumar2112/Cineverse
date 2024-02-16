@@ -19,9 +19,6 @@ interface props {
   endpoint: string;
 }
 const Carousel = ({ title, data, loading, endpoint }: props) => {
-  console.log(data);
-  data?.map((item) => console.log(item.id));
-
   return (
     <Box marginBottom={10} marginTop={10}>
       <ContentWrapper>
